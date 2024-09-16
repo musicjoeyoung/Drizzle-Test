@@ -1,0 +1,1 @@
+ALTER TABLE `posts` ADD `test` varchar(100) NOT NULL;
