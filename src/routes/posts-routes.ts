@@ -28,7 +28,10 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
     try {
-        const result = await db.insert(Posts).values([{ title: req.body.title, content: req.body.content }]);
+        const title: string = req.body.title;
+        const content: string = req.body.content;
+        const userId: number = req.body.userId;
+        const result = await db.insert(Posts).values({ title: title, content: content, userId: userId });
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: "Failed to create post" });

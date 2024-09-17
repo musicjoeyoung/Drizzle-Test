@@ -1,3 +1,13 @@
 # Drizzle-Test
 
-This is a test as I learn how to efficiently use Drizzle with TypeScript, Zod for type safety enforcement, and Dotenvx 
+## Description
+This is a practice project involving users, posts, comments, likes, etc.
+
+## Purpose
+This is my attempt at learning how to use Drizzle and Zod.
+
+## Tech
+- TypeScript
+- Drizzle - MySql
+- Zod
+- Dotenvx
