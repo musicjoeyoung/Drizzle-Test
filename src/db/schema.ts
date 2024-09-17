@@ -1,6 +1,6 @@
 import { int, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
-export const User = mysqlTable('users', {
+export const Users = mysqlTable('users', {
     id: int("id").primaryKey().autoincrement(),
     name: varchar("name", { length: 100 }).notNull(),
     email: varchar("email", { length: 100 }).unique().notNull(),
@@ -16,7 +16,7 @@ export const Posts = mysqlTable('posts', {
     content: varchar("content", { length: 255 }).notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
-    userId: int("user_id").references(() => User.id).notNull()
+    userId: int("user_id").references(() => Users.id).notNull()
 })
 
 export const Categories = mysqlTable('categories', {
@@ -44,7 +44,7 @@ export const PostTags = mysqlTable('post_tags', {
 //join tables that connects posts and likes
 export const PostLikes = mysqlTable('post_likes', {
     postId: int("post_id").references(() => Posts.id).notNull(),
-    userId: int("user_id").references(() => User.id).notNull()
+    userId: int("user_id").references(() => Users.id).notNull()
 })
 
 export const Comments = mysqlTable('comments', {
@@ -52,6 +52,6 @@ export const Comments = mysqlTable('comments', {
     content: varchar("content", { length: 255 }).notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
-    userId: int("user_id").references(() => User.id).notNull(),
+    userId: int("user_id").references(() => Users.id).notNull(),
     postId: int("post_id").references(() => Posts.id).notNull()
 })

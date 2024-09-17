@@ -1,7 +1,7 @@
 import express, { Request, Response, Router } from "express";
 
 import { Posts } from "../db/schema";
-import { User } from "../db/schema";
+import { Users } from "../db/schema";
 import { db } from "../db/db";
 import { eq } from "drizzle-orm"
 
@@ -9,7 +9,7 @@ const router: Router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
     try {
-        const users = await db.select().from(User);
+        const users = await db.select().from(Users);
         res.json(users);
 
 
@@ -23,7 +23,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
     const userId: number = Number(req.params.id);
     try {
-        const user = await db.select().from(User).where(eq(User.id, userId));
+        const user = await db.select().from(Users).where(eq(Users.id, userId));
         res.json(user);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch user" });
@@ -33,7 +33,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 router.get("/:id/posts", async (req: Request, res: Response) => {
     const userId: number = Number(req.params.id);
     try {
-        const result = await db.select().from(Posts).where(eq(Posts.userId, userId)).innerJoin(User, eq(Posts.userId, User.id));
+        const result = await db.select().from(Posts).where(eq(Posts.userId, userId)).innerJoin(Users, eq(Posts.userId, Users.id));
         if (result.length > 0) {
             const user = {
                 id: result[0].users.id,
@@ -60,7 +60,7 @@ router.get("/:id/posts", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
     try {
-        const result = await db.insert(User).values([{ name: req.body.name, email: req.body.email, password: req.body.password, age: req.body.age }]);
+        const result = await db.insert(Users).values([{ name: req.body.name, email: req.body.email, password: req.body.password, age: req.body.age }]);
         res.status(201).json(result);
     } catch (error) {
         res.status(500).json({ error: "Failed to create user" });

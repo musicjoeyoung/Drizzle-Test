@@ -1,13 +1,18 @@
+import { Post } from '../types/types';
 import { Posts } from './schema';
-import { User } from './schema';
+import { User } from '../types/types';
+import { Users } from './schema';
 import { db } from './db';
-import { postData } from '../seeds/post-seeds';
-import { seedData } from '../seeds/user-seeds';
+import { postSeedData } from '../seeds/post-seeds';
+import { userSeedData } from '../seeds/user-seeds';
+
+const users: User[] = userSeedData as User[];
+const posts: Post[] = postSeedData as Post[];
 
 async function seed() {
     console.log('Seeding started');
-    await db.insert(User).values(seedData);
-    await db.insert(Posts).values(postData);
+    await db.insert(Users).values(users);
+    await db.insert(Posts).values(posts);
 
     console.log('Seeding completed');
 }

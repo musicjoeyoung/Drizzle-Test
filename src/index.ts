@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express"
 
-import { User } from "./db/schema"
+import { Users } from "./db/schema"
 import { db } from "./db/db"
 import env from "../env"
 import postsRoutes from "./routes/posts-routes"
