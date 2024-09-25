@@ -7,7 +7,7 @@
     "generate": "dotenvx run -- drizzle-kit generate --config ./drizzle.config.ts",
     "create:tables": "ts-node --files ./src/db/migrations/migrator.ts",
     "seed": "dotenvx run -- ts-node --files ./src/db/seed.ts",
-    "studio": "drizzle-kit studio --config ./drizzle.config.ts"
+    "studio": "dotenvx run -- drizzle-kit studio --config ./drizzle.config.ts"
   },
   "keywords": [],
   "author": "",
